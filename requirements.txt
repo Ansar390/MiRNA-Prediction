@@ -1,0 +1,4 @@
+biopython==1.83
+scikit-learn==1.2.2
+streamlit==1.29.0
+numpy==1.26.2
