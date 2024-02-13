@@ -55,9 +55,10 @@ with open("dataset.rar", "rb") as fp:
         mime="application/rar"
     )
     
+
 if st.button('Example'):
     st.code(">zma-miR169e MIMAT0001736\nUAGCCAAGGAGACUGCCUACG", language="markdown")
-    st.code(">mtr-miR4414a-3p MIMAT0021207\nAUCCAACGAUGCGGGAGCUGC", language="markdown")
+    st.code(">cca-miR6103-3p MIMAT0024536\nCAAGAAGUUGUCUUAGGCAUG", language="markdown")
  
 if st.sidebar.button("SUBMIT"):
     if(fasta_string==""):
