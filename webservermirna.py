@@ -56,13 +56,9 @@ with open("dataset.rar", "rb") as fp:
     )
     
 if st.button('Example'):
-    st.code(">sp|O95476|CNEP1_HUMAN CTD nuclear envelope phosphatase 1 OS=Homo sapiens OX=9606 GN=CTDNEP1 PE=1 SV=2\nMMRTQCLLGLRTFVAFAAKLWSFFIYLLRRQIRTVIQYQTVRYDILPLSPVSRNRLAQVKRKILVLDLDETLIHSHHDGVLRPTVRPGTPPDFILKVVIDKHPVRFFVHKRPHVDFFLEVVSQWYELVVFTASMEIYGSAVADKLDNSRSILKRRYYRQHCTLELGSYIKDLSVVHSDLSSIVILDNSPGAYRSHPDNAIPIKSWFSDPSDTALLNLLPMLDALRFTADVRSVLSRNLHQHRLW", language="markdown")
-    st.code(">sp|Q99653|CHP1_HUMAN Calcineurin B homologous protein 1 OS=Homo sapiens OX=9606 GN=CHP1 PE=1 SV=3\nMGSRASTLLRDEELEEIKKETGFSHSQITRLYSRFTSLDKGENGTLSREDFQRIPELAINPLGDRIINAFFPEGEDQVNFRGFMRTLAHFRPIEDNEKSKDVNGPEPLNSRSNKLHFAFRLYDLDKDEKISRDELLQVLRMMVGVNISDEQLGSIADRTIQEADQDGDSAISFTEFVKVLEKVDVEQKMSIRFLH", language="markdown")
-    st.code(">sp|P32929|CGL_HUMAN Cystathionine gamma-lyase OS=Homo sapiens OX=9606 GN=CTH PE=1 SV=3\nMQEKDASSQGFLPHFQHFATQAIHVGQDPEQWTSRAVVPPISLSTTFKQGAPGQHSGFEYSRSGNPTRNCLEKAVAALDGAKYCLAFASGLAATVTITHLLKAGDQIICMDDVYGGTNRYFRQVASEFGLKISFVDCSKIKLLEAAITPETKLVWIETPTNPTQKVIDIEGCAHIVHKHGDIILVVDNTFMSPYFQRPLALGADISMYSATKYMNGHSDVVMGLVSVNCESLHNRLRFLQNSLGAVPSPIDCYLCNRGLKTLHVRMEKHFKNGMAVAQFLESNPWVEKVIYPGLPSHPQHELVKRQCTGCTGMVTFYIKGTLQHAEIFLKNLKLFTLAESLGGFESLAELPAIMTHASVLKNDRDVLGISDTLIRLSVGLEDEEDLLEDLDQALKAAHPPSGSHS", language="markdown")
-
-# st.selectbox()
-
-# def mirna()    
+    st.code(">zma-miR169e MIMAT0001736\nUAGCCAAGGAGACUGCCUACG", language="markdown")
+    st.code(">mtr-miR4414a-3p MIMAT0021207\nAUCCAACGAUGCGGGAGCUGC", language="markdown")
+ 
 if st.sidebar.button("SUBMIT"):
     if(fasta_string==""):
         st.info("Please input the sequence first.")
@@ -83,28 +79,13 @@ if st.sidebar.button("SUBMIT"):
             temp_seq =  final_df.iloc[iter, 1]
             print(temp_seq,"temp seq")
 
-
-            
-            # vec=fe.calcFV(temp_seq.lower())
-            # vec= np.array(vec)
-            # print("In array")
-
             testx = preMirna.drop(['class'],axis=1)
 
             X1 = testx.to_numpy()
             scaler = StandardScaler().fit(X1)
-            # vec = scaler.transform(X1)
-            # print("In scaler",vec.shape) .reshape(1, -1)
 
             fv_array = scaler.transform(np.array(fe.calcFV(temp_seq.lower())).reshape(1, 522))
-            # fv_array = np.nan_to_num(fv_array.astype('float64'))
-            # fv_array = np.nan_to_num(fv_array)
-
             fv_array = np.nan_to_num(fv_array.astype('float32'))
-            # print("fv_array",fv_array)
-            # fv_array=fv_array.reshape(1, -1)
-
-            # print (fv_array,"fv array to model")
             score = model.predict(fv_array)
             pred_label = np.round_(score, decimals=0, out=None)
             if(pred_label==1):
